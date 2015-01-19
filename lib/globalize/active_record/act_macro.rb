@@ -74,7 +74,7 @@ module Globalize
         has_many :translations, :class_name  => translation_class.name,
                                 :foreign_key => options[:foreign_key],
                                 #:dependent   => :destroy,
-                                :extend      => HasManyExtensions,
+                                #:extend      => HasManyExtensions,
                                 :autosave    => true
 
         before_create :save_translations!
