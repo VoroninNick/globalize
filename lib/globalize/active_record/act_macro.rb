@@ -77,8 +77,8 @@ module Globalize
                                 :extend      => HasManyExtensions,
                                 :autosave    => true
 
-        after_create :save_translations!
-        after_update :save_translations!
+        before_create :save_translations!
+        before_update :save_translations!
       end
     end
 
