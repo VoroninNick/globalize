@@ -84,7 +84,8 @@ module Globalize
 
     module HasManyExtensions
       def find_or_initialize_by_locale(locale)
-        with_locale(locale.to_s).first || build(:locale => locale.to_s)
+        #with_locale(locale.to_s).first || build(:locale => locale.to_s)
+        with_locale(locale.to_s)[0] || build(:locale => locale.to_s)
       end
     end
   end
