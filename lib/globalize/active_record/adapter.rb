@@ -54,7 +54,14 @@ module Globalize
       # Sometimes the translation is initialised before a foreign key can be set.
       def ensure_foreign_key_for(translation)
         # AR >= 4.1 reflections renamed to _reflections
-        translation[translation.class.reflections[:globalized_model].foreign_key] = record.id
+        local_translation_class = translation.class
+
+        reflections_method = :reflections
+        reflections_method = :_reflections unless local_translation_class.respond_to?(reflections_method)
+        #translation[translation.class.reflections[:globalized_model].foreign_key] = record.id
+        if local_translation_class.respond_to?(reflections_method)
+          translation[local_translation_class.send(reflections_method)[:globalized_model].foreign_key] = record.id
+        end
       end
 
       def type_cast(name, value)
