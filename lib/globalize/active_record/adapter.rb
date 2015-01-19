@@ -60,7 +60,11 @@ module Globalize
         reflections_method = :_reflections unless local_translation_class.respond_to?(reflections_method)
         #translation[translation.class.reflections[:globalized_model].foreign_key] = record.id
         if local_translation_class.respond_to?(reflections_method)
-          translation[local_translation_class.send(reflections_method)[:globalized_model].foreign_key] = record.id
+          reflection_globalized_model = local_translation_class.send(reflections_method)[:globalized_model]
+          local_foreign_key = reflection_globalized_model.foreign_key rescue :article_id
+          #if reflection_globalized_model.respond_to?(:foreign_key)
+            translation[local_foreign_key] = record.id
+          #end
         end
       end
 
