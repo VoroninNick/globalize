@@ -61,7 +61,7 @@ module Globalize
         #translation[translation.class.reflections[:globalized_model].foreign_key] = record.id
         if local_translation_class.respond_to?(reflections_method)
           reflection_globalized_model = local_translation_class.send(reflections_method)[(:globalized_model).to_s]
-          local_foreign_key = reflection_globalized_model.foreign_key rescue :article_id
+          local_foreign_key = reflection_globalized_model.foreign_key
           #if reflection_globalized_model.respond_to?(:foreign_key)
             translation[local_foreign_key] = record.id
           #end
